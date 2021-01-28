@@ -1,8 +1,10 @@
 import pup from "puppeteer"
 
 // Make sure we send enough arguments
-if(process.argv.length < 6)
-    process.exit()
+if(process.argv.length < 6) {
+    console.error('Not enough arguments.')
+    process.exit(0)
+}
 
 // Important constants
 const IKON = {
@@ -73,8 +75,10 @@ for(let i = 0; i < DATE.month - now.getMonth() - 1; i++) {
 let datePicked = await page.$$(`.DayPicker-Day[aria-label="${then.toDateString()}"]:not(.DayPicker-Day--unavailable)`)
 
 // Not available? suicide
-if(!datePicked.length)
-    process.exit()
+if(!datePicked.length) {
+    console.error('No reservations available.')
+    process.exit(0)
+}
 
 datePicked[0].click()
 await delay(300)
