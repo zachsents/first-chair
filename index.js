@@ -1,16 +1,21 @@
 import pup from "puppeteer"
 
+// Make sure we send enough arguments
+if(process.argv.length < 6)
+    process.exit()
+
 // Important constants
 const IKON = {
     login: "https://account.ikonpass.com/en/login",
     reservation: "https://account.ikonpass.com/en/myaccount/add-reservations/"
 }
-const EMAIL = ""
-const PASSWORD = ""
+const EMAIL = process.argv[2]
+const PASSWORD = process.argv[3]
 const DATE = {
-    month: 3,
-    day: 29
+    month: parseInt(process.argv[4]),
+    day: parseInt(process.argv[5])
 }
+
 
 // Open browser
 const browser = await pup.launch({
