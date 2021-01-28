@@ -21,7 +21,7 @@ const DATE = {
 
 // Open browser
 const browser = await pup.launch({
-    headless: false,
+    headless: true,
     ignoreHTTPSErrors: true,
     args: [`--window-size=800,600`]
 })
@@ -35,6 +35,7 @@ await page.goto(IKON.login)
 
 // stupid fucking cookie acknowledgemnt that you have to click
 // 3 times for some reason
+/*
 await delay(1000)
 await page.mouse.click(150, 430)
 await delay(500)
@@ -42,6 +43,7 @@ await page.mouse.click(150, 430)
 await delay(500)
 await page.mouse.click(150, 430)
 await delay(1000)
+*/
 
 // login
 await page.type("#email", EMAIL)
@@ -52,9 +54,9 @@ await page.waitForNavigation()
 
 // let's make the res
 await page.goto(IKON.reservation)
-await delay(300)
+await page.waitForSelector('input[placeholder="Search"]')
 await page.type('input[placeholder="Search"]', "winter park")
-await delay(300)
+await delay(800)
 await page.click('.react-autosuggest__suggestions-list li')
 await delay(300)
 await page.keyboard.press('Tab')
@@ -74,6 +76,7 @@ for(let i = 0; i < DATE.month - now.getMonth() - 1; i++) {
 }
 let datePicked = await page.$$(`.DayPicker-Day[aria-label="${then.toDateString()}"]:not(.DayPicker-Day--unavailable)`)
 
+
 // Not available? suicide
 if(!datePicked.length) {
     console.error('No reservations available.')
@@ -88,13 +91,20 @@ await delay(300)
 await page.$$eval('button', buttons => buttons[9].click())
 await delay(1000)
 await page.$$eval('button', buttons => buttons[11].click())
+
 await page.waitForSelector('input[type="checkbox"]')
-await page.click('input[type="checkbox"]')
-await delay(300)
+await page.$$eval('input[type="checkbox"]', inputs => {
+    inputs[0].click()
+})
+
+// i think this delay is unnecessary but it cant hurt
+await delay(2000)
 await page.$$eval('button', buttons => buttons[9].click())
 
 console.log("Reserved.")
 
+await delay(1000)
+process.exit(0)
 
 
 /*
