@@ -23,7 +23,7 @@ const DATE = {
 const browser = await pup.launch({
     headless: true,
     ignoreHTTPSErrors: true,
-    args: [`--window-size=1200,800`,'--no-sandbox']
+    args: [`--window-size=800,600`,'--no-sandbox']
 })
 const [page] = await browser.pages()
 
