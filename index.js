@@ -52,10 +52,6 @@ await page.type("#email", EMAIL)
 await page.type("#sign-in-password", PASSWORD)
 await delay(500)
 await page.click("button.submit")
-
-await delay(3000)
-await screenshot()
-
 await page.waitForNavigation()
 
 console.log('Logged in.')
