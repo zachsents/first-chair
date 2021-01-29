@@ -30,8 +30,12 @@ const [page] = await browser.pages()
 // Send some commands to fix browser view
 await page._client.send('Emulation.clearDeviceMetricsOverride')
 
+console.log('Browser opened.')
+
 // Login to Ikon account
 await page.goto(IKON.login)
+
+console.log('Navigated to log in page.')
 
 // stupid fucking cookie acknowledgemnt that you have to click
 // 3 times for some reason
@@ -51,6 +55,8 @@ await page.type("#sign-in-password", PASSWORD)
 await delay(500)
 await page.click("button.submit")
 await page.waitForNavigation()
+
+console.log('Logged in.')
 
 // let's make the res
 await page.goto(IKON.reservation)
