@@ -21,9 +21,9 @@ const DATE = {
 
 // Open browser
 const browser = await pup.launch({
-    headless: false,
+    headless: true,
     ignoreHTTPSErrors: true,
-    args: [`--window-size=800,600`,'--no-sandbox']
+    args: [`--window-size=1200,800`,'--no-sandbox']
 })
 const [page] = await browser.pages()
 
@@ -39,13 +39,13 @@ console.log('Navigated to log in page.')
 
 // stupid fucking cookie acknowledgemnt that you have to click
 // 3 times for some reason
-await delay(1000)
-await page.mouse.click(150, 430)
-await delay(500)
-await page.mouse.click(150, 430)
-await delay(500)
-await page.mouse.click(150, 430)
-await delay(1000)
+// await delay(1000)
+// await page.mouse.click(150, 430)
+// await delay(500)
+// await page.mouse.click(150, 430)
+// await delay(500)
+// await page.mouse.click(150, 430)
+// await delay(1000)
 
 // login
 await page.type("#email", EMAIL)
