@@ -53,6 +53,9 @@ await delay(1000)
 await page.type("#email", EMAIL)
 await page.type("#sign-in-password", PASSWORD)
 await delay(500)
+
+await screenshot()
+
 await page.click("button.submit")
 await page.waitForNavigation()
 
@@ -118,4 +121,9 @@ process.exit(0)
 */
 function delay(ms) {
     return new Promise(res => setTimeout(() => res(), ms))
+}
+
+
+async function screenshot() {
+    await page.screenshot({path: 'screenshot.png'});
 }
